@@ -1,24 +1,24 @@
 <?php
 session_start();
 
-// Generar código aleatorio de 6 dígitos
+//En este genera código aleatorio de 6 dígitos
 $code = strval(rand(100000, 999999));
 $_SESSION['captcha'] = $code;
 
-// Crear imagen
+//Aqui crea la imagen
 $width = 120;
 $height = 40;
 $image = imagecreatetruecolor($width, $height);
 
-// Colores
+//Colores para la imagen
 $bgColor = imagecolorallocate($image, 255, 255, 255);
 $textColor = imagecolorallocate($image, 0, 0, 0);
 $lineColor = imagecolorallocate($image, 200, 200, 200);
 
-// Fondo blanco
+//Fondito blanco
 imagefilledrectangle($image, 0, 0, $width, $height, $bgColor);
 
-// Líneas de ruido
+//Líneas de ruido
 for ($i = 0; $i < 5; $i++) {
     imageline($image, 0, rand(0, $height), $width, rand(0, $height), $lineColor);
 }

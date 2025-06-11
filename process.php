@@ -9,24 +9,22 @@ $sessionCaptcha = $_SESSION['captcha'] ?? '';
 
 $errors = [];
 
+    // Validación del correo electrónico
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo "Invalid email format";
-} else {
-      // Process the form data (using prepared statements for database interaction)
+        $errors[] = "El correo electrónico no es válido.";
+    }
 
-    echo "Form submitted successfully";
-}
 
 if (!preg_match('/^(\d{3}-\d{3}-\d{4}|\d{10})$/', $phone)) {
     $errors[] = "El teléfono debe tener el formato 123-456-7890 o 1234567890.";
 }
 
-// Validación de captcha (ignora espacios y no distingue mayúsculas/minúsculas)
+//Validación del captchita (ignora espacios y no distingue mayúsculas/minúsculas)
 if (trim(strtolower($userCaptcha)) !== trim(strtolower($sessionCaptcha))) {
     $errors[] = "El código Captcha es incorrecto.";
 }
 
-// Mostrar resultado
+//Mostrar resultado
 if (empty($errors)) {
     echo "<p style='color:green;'>¡Formulario enviado correctamente!</p>";
 } else {
